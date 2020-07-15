@@ -80,6 +80,7 @@ diff.Diff;
  */
 diff.prototype.main = function(text1, text2, opt_checklines,
     opt_deadline) {
+      console.log(text1 + "     " + text2)
   // Set a deadline by which time the diff must be complete.
   if (typeof opt_deadline == 'undefined') {
     if (this.Timeout <= 0) {
