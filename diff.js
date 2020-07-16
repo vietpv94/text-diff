@@ -533,7 +533,10 @@ diff.prototype.commonPrefix = function(text1, text2) {
     }
     pointermid = Math.floor((pointermax - pointermin) / 2 + pointermin);
   }
-  return pointermid;
+  var commonprefix = text1.substring(0, pointermid);
+  var res = commonprefix.split(" ");
+  var lastWord = res[res.length - 1];
+  return pointermid - lastWord.length;
 };
 
 
@@ -565,10 +568,8 @@ diff.prototype.commonSuffix = function(text1, text2) {
     }
     pointermid = Math.floor((pointermax - pointermin) / 2 + pointermin);
   }
-  var commonprefix = text1.substring(0, pointermid);
-  var res = commonprefix.split(" ");
-  var lastWord = res[res.length - 1];
-  return pointermid - lastWord.length;
+
+  return pointermid;
 };
 
 
