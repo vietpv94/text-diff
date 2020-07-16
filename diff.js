@@ -111,9 +111,10 @@ diff.prototype.main = function(text1, text2, opt_checklines,
 
   // Trim off common prefix (speedup).
   var commonlength = this.commonPrefix(text1, text2);
-  
-  console.log("commonlength1", commonlength)
+
   var commonprefix = text1.substring(0, commonlength);
+    
+  console.log("commonlength1", commonlength)
   console.log("commonprefix1", commonprefix)
   console.log("text1cf", text1)
   console.log("text2cf", text2)
@@ -548,6 +549,11 @@ diff.prototype.commonPrefix = function(text1, text2) {
     }
     pointermid = Math.floor((pointermax - pointermin) / 2 + pointermin);
   }
+
+  var commonprefix = text1.substring(0, pointermid);
+  var res = commonprefix.split(" ");
+  var lastWord = res[res.length - 1];
+  pointermid = pointermid - lastWord.length;
   return pointermid;
 };
 
