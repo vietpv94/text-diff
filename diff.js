@@ -204,14 +204,14 @@ diff.prototype.compute_ = function(text1, text2, checklines,
   //   var diffs_a = this.main(text1_a, text2_a, checklines, deadline);
   //   var diffs_b = this.main(text1_b, text2_b, checklines, deadline);
   //   // Merge the results.
-    return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
-  }
+  //   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
+  // }
 
-  if (checklines && text1.length > 100 && text2.length > 100) {
-    return this.lineMode_(text1, text2, deadline);
-  }
+  // if (checklines && text1.length > 100 && text2.length > 100) {
+  //   return this.lineMode_(text1, text2, deadline);
+  // }
 
-  return this.bisect_(text1, text2, deadline);
+  return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
 };
 
 
