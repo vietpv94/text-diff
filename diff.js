@@ -127,6 +127,8 @@ diff.prototype.main = function(text1, text2, opt_checklines,
 
   // Compute the diff on the middle block.
   var diffs = [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
+  console.log("text1", text1)
+  console.log("text2", text2)
   console.log(diffs)
   // Restore the prefix and suffix.
   if (commonprefix) {
