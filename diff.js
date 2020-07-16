@@ -158,49 +158,49 @@ diff.prototype.compute_ = function (text1, text2, checklines, deadline) {
   if (!text2) {
     // Just delete some text (speedup).
     return [[DIFF_DELETE, text1]];
-  } 
+  }
+
   var longtext = text1.length > text2.length ? text1 : text2;
   var shorttext = text1.length > text2.length ? text2 : text1;
-  console.log("longtext", longtext)
-  console.log("shorttext", shorttext)
-  // var i = longtext.indexOf(shorttext);
-  // if (i != -1) {
-  //   // Shorter text is inside the longer text (speedup).
-  //   diffs = [[DIFF_INSERT, longtext.substring(0, i)],
-  //            [DIFF_EQUAL, shorttext],
-  //            [DIFF_INSERT, longtext.substring(i + shorttext.length)]];
-  //   // Swap insertions for deletions if diff is reversed.
-  //   if (text1.length > text2.length) {
-  //     diffs[0][0] = diffs[2][0] = DIFF_DELETE;
-  //   }
-  //   return diffs;
-  // }
-  // if (shorttext.length == 1) {
-  //   // Single character string.
-  //   // After the previous speedup, the character can't be an equality.
-  //   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
-  // }
-  // // Check to see if the problem can be split in two.
-  // var hm = this.halfMatch_(text1, text2);
-  // if (hm) {
-  //   // A half-match was found, sort out the return data.
-  //   var text1_a = hm[0];
-  //   var text1_b = hm[1];
-  //   var text2_a = hm[2];
-  //   var text2_b = hm[3];
-  //   var mid_common = hm[4];
-  //   // Send both pairs off for separate processing.
-  //   var diffs_a = this.main(text1_a, text2_a, checklines, deadline);
-  //   var diffs_b = this.main(text1_b, text2_b, checklines, deadline);
-  //   // Merge the results.
-  //   return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
-  // }
-  // if (checklines && text1.length > 100 && text2.length > 100) {
-  //   return this.lineMode_(text1, text2, deadline);
-  // }
+  var i = longtext.indexOf(shorttext);
+  if (i != -1) {
+    // Shorter text is inside the longer text (speedup).
+    diffs = [[DIFF_INSERT, text2],
+             [DIFF_DELETE, text1]];
+    // Swap insertions for deletions if diff is reversed.
+    if (text1.length > text2.length) {
+      diffs[0][0] = diffs[2][0] = DIFF_DELETE;
+    }
+    return diffs;
+  }
 
+  if (shorttext.length == 1) {
+    // Single character string.
+    // After the previous speedup, the character can't be an equality.
+    return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
+  }
 
-  return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
+  // Check to see if the problem can be split in two.
+  var hm = this.halfMatch_(text1, text2);
+  if (hm) {
+    // A half-match was found, sort out the return data.
+    var text1_a = hm[0];
+    var text1_b = hm[1];
+    var text2_a = hm[2];
+    var text2_b = hm[3];
+    var mid_common = hm[4];
+    // Send both pairs off for separate processing.
+    var diffs_a = this.main(text1_a, text2_a, checklines, deadline);
+    var diffs_b = this.main(text1_b, text2_b, checklines, deadline);
+    // Merge the results.
+    return diffs_a.concat([[DIFF_EQUAL, mid_common]], diffs_b);
+  }
+
+  if (checklines && text1.length > 100 && text2.length > 100) {
+    return this.lineMode_(text1, text2, deadline);
+  }
+
+  return this.bisect_(text1, text2, deadline);
 };
 /**
  * Do a quick line-level diff on both strings, then rediff the parts for
