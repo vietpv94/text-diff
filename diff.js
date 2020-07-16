@@ -116,7 +116,9 @@ diff.prototype.main = function(text1, text2, opt_checklines,
 
   // Trim off common suffix (speedup).
   commonlength = this.commonSuffix(text1, text2);
+  console.log(commonlength)
   var commonsuffix = text1.substring(text1.length - commonlength);
+  console.log(commonsuffix)
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
   console.log("text1", text1)
