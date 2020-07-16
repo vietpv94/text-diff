@@ -165,8 +165,9 @@ diff.prototype.compute_ = function (text1, text2, checklines, deadline) {
   var i = longtext.indexOf(shorttext);
   if (i != -1) {
     // Shorter text is inside the longer text (speedup).
-    diffs = [[DIFF_INSERT, text2],
-             [DIFF_DELETE, text1]];
+    diffs = [[DIFF_INSERT, longtext.substring(0, i)],
+             [DIFF_EQUAL, shorttext],
+             [DIFF_INSERT, longtext.substring(i + shorttext.length)]];
     // Swap insertions for deletions if diff is reversed.
     if (text1.length > text2.length) {
       diffs[0][0] = diffs[2][0] = DIFF_DELETE;
