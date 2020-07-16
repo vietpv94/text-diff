@@ -119,7 +119,8 @@ diff.prototype.main = function(text1, text2, opt_checklines,
   var commonsuffix = text1.substring(text1.length - commonlength);
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
-
+  console.log("text1", text1)
+  console.log("text2", text2)
   // Compute the diff on the middle block.
   var diffs = this.compute_(text1, text2, checklines, deadline);
 
