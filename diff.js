@@ -130,6 +130,7 @@ diff.prototype.main = function(text1, text2, opt_checklines,
   console.log("text1", text1)
   console.log("text2", text2)
   console.log(diffs)
+  console.log([DIFF_DELETE, text1])
   // Restore the prefix and suffix.
   if (commonprefix) {
     diffs.unshift([DIFF_EQUAL, commonprefix]);
