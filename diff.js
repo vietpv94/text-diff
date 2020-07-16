@@ -120,16 +120,13 @@ diff.prototype.main = function(text1, text2, opt_checklines,
   // Trim off common suffix (speedup).
   commonlength = this.commonSuffix(text1, text2);
   var commonsuffix = text1.substring(text1.length - commonlength);
-  console.log(commonsuffix)
-  console.log("text1c", text1)
-  console.log("text2c", text2)
   text1 = text1.substring(0, text1.length - commonlength);
   text2 = text2.substring(0, text2.length - commonlength);
   console.log("text1", text1)
   console.log("text2", text2)
 
   // Compute the diff on the middle block.
-  var diffs = this.compute_(text1, text2, checklines, deadline);
+  var diffs = [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
   console.log(diffs)
   // Restore the prefix and suffix.
   if (commonprefix) {
