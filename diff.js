@@ -103,7 +103,7 @@ diff.prototype.main = function (text1, text2, opt_checklines,
     return [];
   }
 
-  if (/\s/.test(text1) && /\s/.test(text2)) {
+  if (!/\s/.test(text1) && !/\s/.test(text2)) {
     return [[DIFF_DELETE, text1], [DIFF_INSERT, text2]];
   }
 
