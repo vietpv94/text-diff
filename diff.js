@@ -130,7 +130,7 @@ diff.prototype.main = function(text1, text2, opt_checklines,
 
   // Compute the diff on the middle block.
   var diffs = this.compute_(text1, text2, checklines, deadline);
-
+  console.log(diffs)
   // Restore the prefix and suffix.
   if (commonprefix) {
     diffs.unshift([DIFF_EQUAL, commonprefix]);
