@@ -139,7 +139,7 @@ diff.prototype.main = function(text1, text2, opt_checklines,
     diffs.push([DIFF_EQUAL, commonsuffix]);
   }
   this.cleanupMerge(diffs);
-  return diffs;
+  return [[DIFF_EQUAL, commonprefix], [DIFF_DELETE, text1], [DIFF_INSERT, text2],[DIFF_EQUAL, commonsuffix]];
 };
 
 /**
