@@ -569,7 +569,10 @@ diff.prototype.commonSuffix = function(text1, text2) {
     pointermid = Math.floor((pointermax - pointermin) / 2 + pointermin);
   }
 
-  return pointermid;
+  var commonsuffix = text1.substring(text1.length - commonlength);
+  var res = commonsuffix.split(" ");
+  var firstWord = res[0];
+  return pointermid - firstWord.length;
 };
 
 
